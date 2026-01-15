@@ -602,6 +602,7 @@
     window.sendChat = function sendChat() {
 
         const body = document.getElementById('chatBody');
+        const input = document.getElementById('chatInput');
         const text = input.value.trim();
         if (!text) return;
 
@@ -610,14 +611,7 @@
         userMsg.textContent = text;
         body.appendChild(userMsg);
 
-        // save message to Firestore
-        addDoc(collection(db, "chats"), {
-            message: text,
-            sender: "user",
-            createdAt: serverTimestamp()
-        });
         input.value = '';
-
         body.scrollTop = body.scrollHeight;
 
         setTimeout(() => {
