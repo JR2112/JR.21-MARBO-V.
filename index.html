@@ -144,6 +144,16 @@
             border-radius: 15px;
             padding: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .card.last-one {
+            box-shadow: 0 0 0 2px #ff9800, 0 0 18px rgba(255,152,0,0.6);
+            animation: pulseLast 1.5s ease-in-out infinite;
+        }
+        @keyframes pulseLast {
+            0% { box-shadow: 0 0 0 2px #ff9800, 0 0 10px rgba(255,152,0,0.4); }
+            50% { box-shadow: 0 0 0 2px #ff9800, 0 0 22px rgba(255,152,0,0.8); }
+            100% { box-shadow: 0 0 0 2px #ff9800, 0 0 10px rgba(255,152,0,0.4); }
         }
         .card img {
             width: 100%;
@@ -331,6 +341,14 @@
     function closeImage() {
         document.getElementById('imageModal').style.display = 'none';
     }
+    
+    // ===== Highlight Last Item =====
+    document.querySelectorAll('.card').forEach(card => {
+        const stockText = card.querySelector('.stock')?.textContent || '';
+        if (stockText.includes('เหลือ 1')) {
+            card.classList.add('last-one');
+        }
+    });
 </script>
 </body>
 </html>
