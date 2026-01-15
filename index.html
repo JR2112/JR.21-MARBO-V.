@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>JR.21 MARBO V.</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
+        * { box-sizing: border-box; }
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -24,12 +21,10 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .header-right img {
             height: 45px;
             border-radius: 8px;
         }
-
         .logo-box {
             position: relative;
             border: 2px solid #ffffff;
@@ -40,48 +35,32 @@
             font-size: 20px;
             letter-spacing: 1px;
         }
-
-            .logo-box::after {
-                content: "★";
-                position: absolute;
-                top: -10px;
-                right: -10px;
-                width: 28px;
-                height: 28px;
-                background: #fff;
-                color: #b71c1c;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 16px;
-                font-weight: bold;
-                box-shadow: 0 0 10px gold;
-                animation: starFloat 3s ease-in-out infinite, starGlow 1.8s ease-in-out infinite;
-            }
-
-        @keyframes starFloat {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-4px) rotate(8deg);
-            }
-
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
+        .logo-box::after {
+            content: "★";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 28px;
+            height: 28px;
+            background: #fff;
+            color: #b71c1c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 0 10px gold;
+            animation: starFloat 3s ease-in-out infinite, starGlow 1.8s ease-in-out infinite;
         }
-
+        @keyframes starFloat {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-4px) rotate(8deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
         @keyframes starGlow {
-            0%,100% {
-                box-shadow: 0 0 6px gold;
-            }
-
-            50% {
-                box-shadow: 0 0 18px gold;
-            }
+            0%,100% { box-shadow: 0 0 6px gold; }
+            50% { box-shadow: 0 0 18px gold; }
         }
 
         /* ===== Layout ===== */
@@ -91,53 +70,49 @@
             gap: 20px;
         }
 
-        /* ===== Responsive (มือถือ) ===== */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                padding: 10px;
-            }
-
-            /* ลดเฉพาะเมนู ไม่กระทบสินค้า */
-            .sidebar {
-                width: 160px;
-                padding: 10px;
-            }
-
-            .sidebar input {
-                padding: 6px 8px;
-                font-size: 13px;
-            }
-
-            .menu {
-                padding: 6px 8px;
-                font-size: 13px;
-            }
-        }
-
-            .sidebar {
-            width: 180px;              /* ⬅️ ลดความกว้างเมนู */
+        /* ===== Sidebar ===== */
+        .sidebar {
+            width: 180px;
             background: #fff;
             border-radius: 10px;
-            padding: 12px;             /* ⬅️ ลด padding */
+            padding: 12px;
         }
-
-            .sidebar input {
-                width: 100%;
-                padding: 6px 8px;      /* ⬅️ ช่องค้นหาเล็กลง */
-                margin-bottom: 10px;
-                border-radius: 6px;
-                border: 1px solid #ccc;
-                font-size: 13px;       /* ⬅️ ตัวอักษรเล็กลง */
-            }
-
+        .sidebar input {
+            width: 100%;
+            padding: 6px 8px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 13px;
+        }
         .menu {
             background: #f0cece;
-            padding: 6px 8px;          /* ⬅️ ปุ่มเมนูเล็กลง */
+            padding: 6px 8px;
             border-radius: 6px;
             margin-bottom: 8px;
             cursor: pointer;
-            font-size: 13px;           /* ⬅️ ตัวอักษรเมนูเล็กลง */
+            font-size: 13px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ===== Ice Crack Effect ===== */
+        .menu.ice::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center,
+                rgba(255,255,255,0.95) 0%,
+                rgba(173,216,230,0.85) 40%,
+                rgba(0,136,255,0.65) 70%,
+                transparent 72%);
+            animation: iceCrack 0.45s ease-out;
+            pointer-events: none;
+        }
+        @keyframes iceCrack {
+            0% { transform: scale(0); opacity: 1; }
+            60% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(1.4); opacity: 0; }
         }
 
         /* ===== Products ===== */
@@ -154,58 +129,42 @@
             border-radius: 15px;
             overflow: hidden;
         }
-
-            .products::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: inherit;
-                filter: blur(8px);
-                transform: scale(1.1);
-                z-index: 0;
-            }
-
-            .products > * {
-                position: relative;
-                z-index: 1;
-            }
-
+        .products::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: inherit;
+            filter: blur(8px);
+            transform: scale(1.1);
+            z-index: 0;
+        }
+        .products > * { position: relative; z-index: 1; }
         .card {
             background: #fff;
             border-radius: 15px;
             padding: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-
-            .card img {
-                width: 100%;
-                height: 200px;
-                object-fit: cover;
-                border-radius: 12px;
-            }
-
-        .name {
-            font-weight: bold;
-            margin-top: 10px;
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
         }
+        .name { font-weight: bold; margin-top: 10px; }
+        .price { color: #000; }
+        .stock { font-size: 13px; color: #555; margin-top: 4px; }
+        .out { color: red; font-weight: bold; }
 
-        .price {
-            color: #000;
-        }
-
-        .stock {
-            font-size: 13px;
-            color: #555;
-            margin-top: 4px;
-        }
-
-        .out {
-            color: red;
-            font-weight: bold;
+        .last-update {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin: 4px 0 6px;
         }
 
         .thank-you {
-            position: fixed;              /* ติดล่างจอ */
+            position: fixed;
             bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
@@ -222,51 +181,32 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        /* ขนาดบนมือถือ */
         @media (max-width: 768px) {
-            .thank-you {
-                font-size: 15px;          /* ⬅️ ตัวอักษรเล็กลงบนมือถือ */
-                padding: 14px 16px;
-                max-width: 100%;
-            }
-        }
-            .last-update {
-            text-align: center;
-            font-size: 12px;        /* ⬅️ เล็กลง ไม่กระทบสินค้า */
-            color: #666;
-            margin: 4px 0 6px;     /* ⬅️ ลดพื้นที่แนวตั้ง */
-        }
-
-        @media (max-width: 768px) {
-            .last-update {
-                font-size: 13px;
-            }
+            .container { flex-direction: column; padding: 10px; }
+            .sidebar { width: 160px; padding: 10px; }
+            .thank-you { font-size: 15px; padding: 14px 16px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="logo-box">JR.21 MARBO V.</div>
-        <div class="header-right">
-            <img src="LOGO.jpg" alt="logo">
-        </div>
+<div class="header">
+    <div class="logo-box">JR.21 MARBO V.</div>
+    <div class="header-right"><img src="LOGO.jpg" alt="logo"></div>
+</div>
+
+<div class="last-update">📅 อัปเดตล่าสุด: <span id="updateDate"></span></div>
+
+<div class="container">
+    <div class="sidebar">
+        <input type="text" id="searchInput" placeholder="Search รายการที่ต้องการหา..." onkeyup="searchProduct()">
+        <div class="menu" onclick="showMenu('menu1')">MARBO 9K</div>
+        <div class="menu" onclick="showMenu('menu2')">น้ำหวาน ยาแก้ไอ</div>
+        <div class="menu" onclick="showMenu('menu3')">รอสินค้า STOCK</div>
     </div>
 
-    <!-- ===== Last Update ===== -->
-    <div class="last-update">📅 อัปเดตล่าสุด: <span id="updateDate"></span></div>
-
-    <div class="container">
-
-        <div class="sidebar">
-            <input type="text" id="searchInput" placeholder="Search รายการที่ต้องการหา..." onkeyup="searchProduct()">
-            <div class="menu" onclick="showMenu('menu1')">MARBO 9K</div>
-            <div class="menu" onclick="showMenu('menu2')">น้ำหวาน ยาแก้ไอ</div>
-            <div class="menu" onclick="showMenu('menu3')">รอสินค้า STOCK</div>
-        </div>
-
-        <div class="products" id="products">
-            <!-- ===== Menu 1 : สินค้าเดิมทั้งหมด ===== -->
+    <div class="products" id="products">
+        <!-- ===== Menu 1 : สินค้าเดิมทั้งหมด ===== -->
             <div class="card" data-menu="menu1"><img src="1.webp"><div class="name">SOUR GUMMY</div><div class="stock">(เหลือ 3 ชิ้น)</div><div class="price">420 THB</div></div>
             <div class="card" data-menu="menu1"><img src="2.webp"><div class="name">PINK BERRY</div><div class="stock">(เหลือ 1 ชิ้น)</div><div class="price">420 THB</div></div>
             <div class="card" data-menu="menu1"><img src="3.webp"><div class="name">WATERMELON BUBBLEGUM</div><div class="stock out">(สินค้าหมด)</div><div class="price">420 THB</div></div>
@@ -305,33 +245,40 @@
 
         <!-- ===== Thank You Message (Fixed Bottom) ===== -->
     <div class="thank-you">🙏 ขอบคุณที่สนับสนุนร้าน JR.21 MARBO V. เสมอมา 🙏</div>
+</div>
 
-    </div>
+<script>
+    let currentMenu = 'menu1';
 
-    <script>
-        let currentMenu = 'menu1';
+    function showMenu(menu) {
+        currentMenu = menu;
 
-        function showMenu(menu) {
-            currentMenu = menu;
-            document.querySelectorAll('.card').forEach(card => {
-                card.style.display = card.dataset.menu === menu ? 'block' : 'none';
-            });
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.display = card.dataset.menu === menu ? 'block' : 'none';
+        });
+
+        document.querySelectorAll('.menu').forEach(m => m.classList.remove('ice'));
+        const activeMenu = [...document.querySelectorAll('.menu')]
+            .find(m => m.getAttribute('onclick')?.includes(menu));
+        if (activeMenu) {
+            activeMenu.classList.add('ice');
+            setTimeout(() => activeMenu.classList.remove('ice'), 500);
         }
+    }
 
-        function searchProduct() {
-            const text = searchInput.value.toLowerCase();
-            document.querySelectorAll('.card').forEach(card => {
-                const name = card.querySelector('.name').textContent.toLowerCase();
-                card.style.display = (card.dataset.menu === currentMenu && name.includes(text)) ? 'block' : 'none';
-            });
-        }
+    function searchProduct() {
+        const text = searchInput.value.toLowerCase();
+        document.querySelectorAll('.card').forEach(card => {
+            const name = card.querySelector('.name').textContent.toLowerCase();
+            card.style.display = (card.dataset.menu === currentMenu && name.includes(text)) ? 'block' : 'none';
+        });
+    }
 
-        // แสดงวันที่อัปเดตล่าสุด
-        const today = new Date();
-        const options = { day: '2-digit', month: 'short', year: 'numeric' };
-        document.getElementById('updateDate').textContent = today.toLocaleDateString('th-TH', options);
+    const today = new Date();
+    const options = { day: '2-digit', month: 'short', year: 'numeric' };
+    document.getElementById('updateDate').textContent = today.toLocaleDateString('th-TH', options);
 
-        showMenu('menu1');
-    </script>
+    showMenu('menu1');
+</script>
 </body>
 </html>
