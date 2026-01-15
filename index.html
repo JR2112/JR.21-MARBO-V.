@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>JR.21 MARBO V.</title>
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -21,10 +24,12 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .header-right img {
             height: 45px;
             border-radius: 8px;
         }
+
         .logo-box {
             position: relative;
             border: 2px solid #ffffff;
@@ -35,32 +40,48 @@
             font-size: 20px;
             letter-spacing: 1px;
         }
-        .logo-box::after {
-            content: "★";
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 28px;
-            height: 28px;
-            background: #fff;
-            color: #b71c1c;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 0 10px gold;
-            animation: starFloat 3s ease-in-out infinite, starGlow 1.8s ease-in-out infinite;
-        }
+
+            .logo-box::after {
+                content: "★";
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                width: 28px;
+                height: 28px;
+                background: #fff;
+                color: #b71c1c;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                font-weight: bold;
+                box-shadow: 0 0 10px gold;
+                animation: starFloat 3s ease-in-out infinite, starGlow 1.8s ease-in-out infinite;
+            }
+
         @keyframes starFloat {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-4px) rotate(8deg); }
-            100% { transform: translateY(0) rotate(0deg); }
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-4px) rotate(8deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
         }
+
         @keyframes starGlow {
-            0%,100% { box-shadow: 0 0 6px gold; }
-            50% { box-shadow: 0 0 18px gold; }
+            0%,100% {
+                box-shadow: 0 0 6px gold;
+            }
+
+            50% {
+                box-shadow: 0 0 18px gold;
+            }
         }
 
         /* ===== Layout ===== */
@@ -77,14 +98,16 @@
             border-radius: 10px;
             padding: 12px;
         }
-        .sidebar input {
-            width: 100%;
-            padding: 6px 8px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 13px;
-        }
+
+            .sidebar input {
+                width: 100%;
+                padding: 6px 8px;
+                margin-bottom: 10px;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+                font-size: 13px;
+            }
+
         .menu {
             background: #f0cece;
             padding: 6px 8px;
@@ -96,23 +119,31 @@
             overflow: hidden;
         }
 
-        /* ===== Ice Crack Effect ===== */
-        .menu.ice::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center,
-                rgba(255,255,255,0.95) 0%,
-                rgba(173,216,230,0.85) 40%,
-                rgba(0,136,255,0.65) 70%,
-                transparent 72%);
-            animation: iceCrack 0.45s ease-out;
-            pointer-events: none;
-        }
+            /* ===== Ice Crack Effect ===== */
+            .menu.ice::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at center, rgba(255,255,255,0.95) 0%, rgba(173,216,230,0.85) 40%, rgba(0,136,255,0.65) 70%, transparent 72%);
+                animation: iceCrack 0.45s ease-out;
+                pointer-events: none;
+            }
+
         @keyframes iceCrack {
-            0% { transform: scale(0); opacity: 1; }
-            60% { transform: scale(1.15); opacity: 1; }
-            100% { transform: scale(1.4); opacity: 0; }
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            60% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
         }
 
         /* ===== Products ===== */
@@ -129,16 +160,22 @@
             border-radius: 15px;
             overflow: hidden;
         }
-        .products::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: inherit;
-            filter: blur(8px);
-            transform: scale(1.1);
-            z-index: 0;
-        }
-        .products > * { position: relative; z-index: 1; }
+
+            .products::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: inherit;
+                filter: blur(8px);
+                transform: scale(1.1);
+                z-index: 0;
+            }
+
+            .products > * {
+                position: relative;
+                z-index: 1;
+            }
+
         .card {
             background: #fff;
             border-radius: 15px;
@@ -148,54 +185,76 @@
             position: relative;
         }
 
-        /* ===== Sold Out Style ===== */
-        .card.sold-out {
-            opacity: 0.55; /* จางลงเล็กน้อย */
-            filter: grayscale(40%) saturate(80%); /* ยังมีสีเหลือ */
-            pointer-events: none;
-        }
-        .card.sold-out::after {
-            content: "SOLD OUT";
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: bold;
-            color: #b71c1c;
-            background: rgba(255,255,255,0.6);
-            border-radius: 15px;
-            letter-spacing: 3px;
-        }
-        .card.best-seller::before {
-            content: "🔥 ขายดี";
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: linear-gradient(45deg, #ff5722, #ff9800);
-            color: #fff;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 4px 8px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            animation: bestPulse 1.5s ease-in-out infinite;
-        }
+            /* ===== Sold Out Style ===== */
+            .card.sold-out {
+                opacity: 0.55; /* จางลงเล็กน้อย */
+                filter: grayscale(40%) saturate(80%); /* ยังมีสีเหลือ */
+                pointer-events: none;
+            }
+
+                .card.sold-out::after {
+                    content: "SOLD OUT";
+                    position: absolute;
+                    inset: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 28px;
+                    font-weight: bold;
+                    color: #b71c1c;
+                    background: rgba(255,255,255,0.6);
+                    border-radius: 15px;
+                    letter-spacing: 3px;
+                }
+
+            .card.best-seller::before {
+                content: "🔥 ขายดี";
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background: linear-gradient(45deg, #ff5722, #ff9800);
+                color: #fff;
+                font-size: 12px;
+                font-weight: bold;
+                padding: 4px 8px;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                animation: bestPulse 1.5s ease-in-out infinite;
+            }
+
         @keyframes bestPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
+
         .card.last-one {
             box-shadow: 0 0 0 2px #ff9800, 0 0 18px rgba(255,152,0,0.6);
             animation: pulseLast 1.5s ease-in-out infinite;
         }
+
         @keyframes pulseLast {
-            0% { box-shadow: 0 0 0 2px #ff9800, 0 0 10px rgba(255,152,0,0.4); }
-            50% { box-shadow: 0 0 0 2px #ff9800, 0 0 22px rgba(255,152,0,0.8); }
-            100% { box-shadow: 0 0 0 2px #ff9800, 0 0 10px rgba(255,152,0,0.4); }
+            0% {
+                box-shadow: 0 0 0 2px #ff9800, 0 0 10px rgba(255,152,0,0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 2px #ff9800, 0 0 22px rgba(255,152,0,0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 0 2px #ff9800, 0 0 10px rgba(255,152,0,0.4);
+            }
         }
+
         .card img {
             width: 100%;
             height: 200px;
@@ -203,10 +262,26 @@
             border-radius: 12px;
             cursor: pointer;
         }
-        .name { font-weight: bold; margin-top: 10px; }
-        .price { color: #000; }
-        .stock { font-size: 13px; color: #555; margin-top: 4px; }
-        .out { color: red; font-weight: bold; }
+
+        .name {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .price {
+            color: #000;
+        }
+
+        .stock {
+            font-size: 13px;
+            color: #555;
+            margin-top: 4px;
+        }
+
+        .out {
+            color: red;
+            font-weight: bold;
+        }
 
         .last-update {
             text-align: center;
@@ -234,11 +309,22 @@
         }
 
         @media (max-width: 768px) {
-            .container { flex-direction: column; padding: 10px; }
-            .sidebar { width: 160px; padding: 10px; }
-            .thank-you { font-size: 15px; padding: 14px 16px; }
+            .container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .sidebar {
+                width: 160px;
+                padding: 10px;
+            }
+
+            .thank-you {
+                font-size: 15px;
+                padding: 14px 16px;
+            }
         }
-    
+
         /* ===== Image Preview Modal ===== */
         .image-modal {
             position: fixed;
@@ -249,18 +335,27 @@
             justify-content: center;
             z-index: 2000;
         }
-        .image-modal img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 16px;
-            box-shadow: 0 0 30px rgba(255,255,255,0.3);
-            animation: zoomIn 0.25s ease-out;
-        }
+
+            .image-modal img {
+                max-width: 90%;
+                max-height: 90%;
+                border-radius: 16px;
+                box-shadow: 0 0 30px rgba(255,255,255,0.3);
+                animation: zoomIn 0.25s ease-out;
+            }
+
         @keyframes zoomIn {
-            from { transform: scale(0.85); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from {
+                transform: scale(0.85);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-    
+
         /* ===== Fake Chat Style ===== */
         #chatToggle {
             position: fixed;
@@ -279,6 +374,7 @@
             z-index: 3000;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
+
         #fakeChat {
             position: fixed;
             bottom: 90px;
@@ -292,6 +388,7 @@
             flex-direction: column;
             z-index: 3000;
         }
+
         .chat-header {
             background: #b71c1c;
             color: #fff;
@@ -300,65 +397,74 @@
             font-weight: bold;
             text-align: center;
         }
+
         .chat-body {
             padding: 10px;
             flex: 1;
             overflow-y: auto;
             font-size: 13px;
         }
+
         .msg {
             margin-bottom: 8px;
             padding: 6px 10px;
             border-radius: 10px;
             max-width: 80%;
         }
-        .msg.bot { background: #f1f1f1; }
-        .msg.user {
-            background: #b71c1c;
-            color: #fff;
-            margin-left: auto;
-        }
+
+            .msg.bot {
+                background: #f1f1f1;
+            }
+
+            .msg.user {
+                background: #b71c1c;
+                color: #fff;
+                margin-left: auto;
+            }
+
         .chat-input {
             display: flex;
             border-top: 1px solid #ddd;
         }
-        .chat-input input {
-            flex: 1;
-            border: none;
-            padding: 8px;
-            font-size: 13px;
-        }
-        .chat-input button {
-            border: none;
-            background: #b71c1c;
-            color: #fff;
-            padding: 0 12px;
-            cursor: pointer;
-        }
+
+            .chat-input input {
+                flex: 1;
+                border: none;
+                padding: 8px;
+                font-size: 13px;
+            }
+
+            .chat-input button {
+                border: none;
+                background: #b71c1c;
+                color: #fff;
+                padding: 0 12px;
+                cursor: pointer;
+            }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <div class="header-left">
-        <div class="logo-box">JR.21 MARBO V.</div>
-        <div class="last-update">📅 อัปเดตล่าสุด: <span id="updateDate"></span></div>
-    </div>
-    <div class="header-right">
-        <img src="LOGO.jpg" alt="logo">
-    </div>
-</div>
-
-<div class="container">
-    <div class="sidebar">
-        <input type="text" id="searchInput" placeholder="Search รายการที่ต้องการหา..." onkeyup="searchProduct()">
-        <div class="menu" onclick="showMenu('menu1')">MARBO 9K</div>
-        <div class="menu" onclick="showMenu('menu2')">น้ำหวาน ยาแก้ไอ</div>
-        <div class="menu" onclick="showMenu('menu3')">รอสินค้า STOCK</div>
+    <div class="header">
+        <div class="header-left">
+            <div class="logo-box">JR.21 MARBO V.</div>
+            <div class="last-update">📅 อัปเดตล่าสุด: <span id="updateDate"></span></div>
+        </div>
+        <div class="header-right">
+            <img src="LOGO.jpg" alt="logo">
+        </div>
     </div>
 
-    <div class="products" id="products">
-        <!-- ===== Menu 1 : สินค้าเดิมทั้งหมด ===== -->
+    <div class="container">
+        <div class="sidebar">
+            <input type="text" id="searchInput" placeholder="Search รายการที่ต้องการหา..." onkeyup="searchProduct()">
+            <div class="menu" onclick="showMenu('menu1')">MARBO 9K</div>
+            <div class="menu" onclick="showMenu('menu2')">น้ำหวาน ยาแก้ไอ</div>
+            <div class="menu" onclick="showMenu('menu3')">รอสินค้า STOCK</div>
+        </div>
+
+        <div class="products" id="products">
+            <!-- ===== Menu 1 : สินค้าเดิมทั้งหมด ===== -->
             <div class="card" data-menu="menu1"><img src="1.webp"><div class="name">SOUR GUMMY</div><div class="stock">(เหลือ 3 ชิ้น)</div><div class="price">420 THB</div></div>
             <div class="card " data-menu="menu1"><img src="2.webp"><div class="name">PINK BERRY</div><div class="stock">(เหลือ 1 ชิ้น)</div><div class="price">420 THB</div></div>
             <div class="card best-seller" data-menu="menu1"><img src="3.webp"><div class="name">WATERMELON BUBBLEGUM</div><div class="stock out">(สินค้าหมด)</div><div class="price">420 THB</div></div>
@@ -395,40 +501,40 @@
 
         </div>
 
-<!-- ===== Image Modal ===== -->
-<div class="image-modal" id="imageModal" onclick="closeImage()">
-    <img id="modalImg" src="" alt="preview">
-</div>
+        <!-- ===== Image Modal ===== -->
+        <div class="image-modal" id="imageModal" onclick="closeImage()">
+            <img id="modalImg" src="" alt="preview">
+        </div>
 
-<!-- ===== Store Conditions ===== -->
-<div class="store-conditions">
-    <strong>📌 คำแนะนำของร้าน</strong><br>
-    • เช็คสินค้าหน้าร้านก่อนทุกครั้ง<br>
-    • สินค้าของแท้ 100%<br>
-    • 🙏 ขอบคุณที่สนับสนุนร้าน JR.21 MARBO V. เสมอมา 🙏
-  
-</div>
+        <!-- ===== Store Conditions ===== -->
+        <div class="store-conditions">
+            <strong>📌 คำแนะนำของร้าน</strong><br>
+            • เช็คสินค้าหน้าร้านก่อนทุกครั้ง<br>
+            • สินค้าของแท้ 100%<br>
+            • 🙏 ขอบคุณที่สนับสนุนร้าน JR.21 MARBO V. เสมอมา 🙏
 
-<!-- ===== Fake Chat Button ===== -->
-<div id="chatToggle">💬</div>
+        </div>
 
-<!-- ===== Fake Chat Box ===== -->
-<div id="fakeChat">
-    <div class="chat-header">แชทกับร้าน</div>
-    <div class="chat-body" id="chatBody">
-        <div class="msg bot">สวัสดีครับ 😊 มีอะไรให้ร้านช่วยไหม</div>
+        <!-- ===== Fake Chat Button ===== -->
+        <div id="chatToggle">💬</div>
+
+        <!-- ===== Fake Chat Box ===== -->
+        <div id="fakeChat">
+            <div class="chat-header">แชทกับร้าน</div>
+            <div class="chat-body" id="chatBody">
+                <div class="msg bot">สวัสดีครับ 😊 มีอะไรให้ร้านช่วยไหม</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="พิมพ์ข้อความ...">
+                <button onclick="sendChat()">ส่ง</button>
+            </div>
+        </div>
+
+        <!-- ===== Thank You Message (Fixed Bottom) ===== -->
+
     </div>
-    <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="พิมพ์ข้อความ...">
-        <button onclick="sendChat()">ส่ง</button>
-    </div>
-</div>
 
-<!-- ===== Thank You Message (Fixed Bottom) ===== -->
-
-</div>
-
-<script>
+    <script>
 // ===== No Firebase / Fake Chat Only =====
 
     let currentMenu = 'menu1';
@@ -494,9 +600,8 @@
     };
 
     window.sendChat = function sendChat() {
-        
+
         const body = document.getElementById('chatBody');
-        const input = document.getElementById('chatInput');
         const text = input.value.trim();
         if (!text) return;
 
@@ -505,7 +610,12 @@
         userMsg.textContent = text;
         body.appendChild(userMsg);
 
-        
+        // save message to Firestore
+        addDoc(collection(db, "chats"), {
+            message: text,
+            sender: "user",
+            createdAt: serverTimestamp()
+        });
         input.value = '';
 
         body.scrollTop = body.scrollHeight;
@@ -538,7 +648,7 @@
     function closeImage() {
         document.getElementById('imageModal').style.display = 'none';
     }
-    
+
     // ===== Highlight Last Item =====
     document.querySelectorAll('.card').forEach(card => {
         const stockEl = card.querySelector('.stock');
@@ -553,6 +663,6 @@
             card.classList.add('sold-out');
         }
     });
-</script>
+    </script>
 </body>
 </html>
