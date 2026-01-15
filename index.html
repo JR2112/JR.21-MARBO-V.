@@ -260,6 +260,81 @@
             from { transform: scale(0.85); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
+    
+        /* ===== Fake Chat Style ===== */
+        #chatToggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #b71c1c;
+            color: #fff;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 3000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        #fakeChat {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 280px;
+            max-height: 380px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            display: none;
+            flex-direction: column;
+            z-index: 3000;
+        }
+        .chat-header {
+            background: #b71c1c;
+            color: #fff;
+            padding: 10px;
+            border-radius: 14px 14px 0 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        .chat-body {
+            padding: 10px;
+            flex: 1;
+            overflow-y: auto;
+            font-size: 13px;
+        }
+        .msg {
+            margin-bottom: 8px;
+            padding: 6px 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        .msg.bot { background: #f1f1f1; }
+        .msg.user {
+            background: #b71c1c;
+            color: #fff;
+            margin-left: auto;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input input {
+            flex: 1;
+            border: none;
+            padding: 8px;
+            font-size: 13px;
+        }
+        .chat-input button {
+            border: none;
+            background: #b71c1c;
+            color: #fff;
+            padding: 0 12px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -294,7 +369,7 @@
             <div class="card best-seller" data-menu="menu1"><img src="8.webp"><div class="name">BLUE ICE</div><div class="stock out">(สินค้าหมด)</div><div class="price">420 THB</div></div>
             <div class="card" data-menu="menu1"><img src="9.webp"><div class="name">PEACH</div><div class="stock out">(สินค้าหมด)</div><div class="price">420 THB</div></div>
             <div class="card" data-menu="menu1"><img src="10.webp"><div class="name">APPLE ALOE</div><div class="stock out">(สินค้าหมด)</div><div class="price">420 THB</div></div>
-            <div class="card" data-menu="menu1"><img src="11.webp"><div class="name">MIXBERRY</div><div class="stock out">(สินค้าหมด)</div><div class="price">420 THB</div></div>
+            <div class="card" data-menu="menu1"><img src="11.webp"><div class="name">MIXBERRY</div><div class="stock">(เหลือ 1 ชิ้น)</div><div class="price">420 THB</div></div>
             <div class="card best-seller" data-menu="menu1"><img src="12.webp"><div class="name">RAINBOW CANDY</div><div class="stock out">(สินค้าหมด)</div><div class="price">420 THB</div></div>
             <div class="card" data-menu="menu1"><img src="13.webp"><div class="name">ORANGE SOUR</div><div class="stock out">(สินค้าหมด)</div><div class="price">420 THB</div></div>
             <div class="card" data-menu="menu1"><img src="14.webp"><div class="name">COLA</div><div class="stock out">(สินค้าหมด)</div><div class="price">420 THB</div></div>
@@ -331,10 +406,26 @@
     • เช็คสินค้าหน้าร้านก่อนทุกครั้ง<br>
     • สินค้าของแท้ 100%<br>
     • 🙏 ขอบคุณที่สนับสนุนร้าน JR.21 MARBO V. เสมอมา 🙏
+  
+</div>
+
+<!-- ===== Fake Chat Button ===== -->
+<div id="chatToggle">💬</div>
+
+<!-- ===== Fake Chat Box ===== -->
+<div id="fakeChat">
+    <div class="chat-header">แชทกับร้าน</div>
+    <div class="chat-body" id="chatBody">
+        <div class="msg bot">สวัสดีครับ 😊 มีอะไรให้ร้านช่วยไหม</div>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="พิมพ์ข้อความ...">
+        <button onclick="sendChat()">ส่ง</button>
+    </div>
 </div>
 
 <!-- ===== Thank You Message (Fixed Bottom) ===== -->
-    
+
 </div>
 
 <script>
@@ -392,6 +483,36 @@
     document.getElementById('updateDate').textContent = today.toLocaleDateString('th-TH', options);
 
     showMenu('menu1');
+
+    // ===== Fake Chat Logic =====
+    const chatToggle = document.getElementById('chatToggle');
+    const fakeChat = document.getElementById('fakeChat');
+    chatToggle.onclick = () => {
+        fakeChat.style.display = fakeChat.style.display === 'flex' ? 'none' : 'flex';
+    };
+
+    function sendChat() {
+        const input = document.getElementById('chatInput');
+        const body = document.getElementById('chatBody');
+        const text = input.value.trim();
+        if (!text) return;
+
+        const userMsg = document.createElement('div');
+        userMsg.className = 'msg user';
+        userMsg.textContent = text;
+        body.appendChild(userMsg);
+        input.value = '';
+
+        body.scrollTop = body.scrollHeight;
+
+        setTimeout(() => {
+            const botMsg = document.createElement('div');
+            botMsg.className = 'msg bot';
+            botMsg.textContent = 'ทางร้านได้รับข้อความแล้วครับ 🙏';
+            body.appendChild(botMsg);
+            body.scrollTop = body.scrollHeight;
+        }, 800);
+    }
 
     // ===== Image Preview Logic =====
     document.querySelectorAll('.card img').forEach(img => {
