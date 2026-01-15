@@ -201,14 +201,30 @@
         }
 
         .thank-you {
-            margin: 20px;
-            padding: 15px;
+            position: fixed;              /* ติดล่างจอ */
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            padding: 14px 20px;
+            max-width: 90%;
             text-align: center;
-            background: #fff;
-            border-radius: 12px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 14px;
             font-weight: bold;
+            font-size: 16px;
+            line-height: 1.6;
             color: #b71c1c;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* ขนาดบนมือถือ */
+        @media (max-width: 768px) {
+            .thank-you {
+                font-size: 15px;          /* ⬅️ ตัวอักษรเล็กลงบนมือถือ */
+                padding: 14px 16px;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -268,8 +284,8 @@
 
         </div>
 
-        <!-- ===== Thank You Message ===== -->
-        <div class="thank-you">🙏 ขอบคุณที่สนับสนุนร้าน JR.21 MARBO V. เสมอมา 🙏</div>
+        <!-- ===== Thank You Message (Fixed Bottom) ===== -->
+    <div class="thank-you">🙏 ขอบคุณที่สนับสนุนร้าน JR.21 MARBO V. เสมอมา 🙏</div>
 
     </div>
 
