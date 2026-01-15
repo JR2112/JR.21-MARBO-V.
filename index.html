@@ -41,6 +41,7 @@
 
     /* Products */
     .products {
+      position: relative;
       flex:1;
       display:grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -51,6 +52,22 @@
       background-repeat: no-repeat;
       padding:20px;
       border-radius:15px;
+      overflow: hidden;
+    }
+    .products::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: inherit;
+      background-size: inherit;
+      background-position: inherit;
+      filter: blur(8px);
+      transform: scale(1.1);
+      z-index: 0;
+    }
+    .products > * {
+      position: relative;
+      z-index: 1;
     }
     .card {
       background:#fff; border-radius:15px; padding:15px;
