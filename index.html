@@ -321,10 +321,33 @@
     function showMenu(menu) {
         currentMenu = menu;
 
-        document.querySelectorAll('.card').forEach(card => {
-            card.style.display = card.dataset.menu === menu ? 'block' : 'none';
+        const container = document.getElementById('products');
+        const cards = [...container.querySelectorAll('.card')]
+            .filter(card => card.dataset.menu === menu);
+
+        // เรียงลำดับ: ขายดี -> มีของ -> หมด
+        cards.sort((a, b) => {
+            const aBest = a.classList.contains('best-seller') ? 1 : 0;
+            const bBest = b.classList.contains('best-seller') ? 1 : 0;
+            if (aBest !== bBest) return bBest - aBest;
+
+            const aOut = a.querySelector('.stock')?.classList.contains('out') ? 1 : 0;
+            const bOut = b.querySelector('.stock')?.classList.contains('out') ? 1 : 0;
+            return aOut - bOut;
         });
 
+        // ซ่อนทั้งหมดก่อน
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.display = 'none';
+        });
+
+        // แสดงและจัดเรียงใหม่
+        cards.forEach(card => {
+            card.style.display = 'block';
+            container.appendChild(card);
+        });
+
+        // เอฟเฟกต์น้ำแข็งที่เมนู
         document.querySelectorAll('.menu').forEach(m => m.classList.remove('ice'));
         const activeMenu = [...document.querySelectorAll('.menu')]
             .find(m => m.getAttribute('onclick')?.includes(menu));
@@ -372,4 +395,3 @@
 </script>
 </body>
 </html>
-
